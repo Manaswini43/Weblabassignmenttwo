@@ -1,0 +1,30 @@
+<?php
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Check if the request is POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Capture form data and sanitize inputs
+    $name = htmlspecialchars(trim($_POST['name']));
+    $email = htmlspecialchars(trim($_POST['email']));
+    $phone = htmlspecialchars(trim($_POST['phone']));
+    $message = htmlspecialchars(trim($_POST['message']));
+
+    // Check if required fields are not empty
+    if (!empty($name) && !empty($email) && !empty($phone)) {
+        // Display the submitted data
+        echo "<h2>Form Submitted Successfully!</h2>";
+        echo "<p><strong>Name:</strong> $name</p>";
+        echo "<p><strong>Email:</strong> $email</p>";
+        echo "<p><strong>Phone:</strong> $phone</p>";
+        echo "<p><strong>Message:</strong> $message</p>";
+    } else {
+        // Handle missing required fields
+        echo "<p style='color: red;'>Please fill in all required fields (Name, Email, and Phone).</p>";
+    }
+} else {
+    // If not a POST request, show error
+    echo "<p style='color: red;'>Invalid request. Please submit the form.</p>";
+}
+?>
